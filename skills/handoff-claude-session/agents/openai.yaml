@@ -1,0 +1,6 @@
+interface:
+  display_name: "Handoff Claude Session"
+  short_description: "Create a handoff from Claude session history"
+  default_prompt: "Use $handoff-claude-session with a Claude session ID to create a handoff document."
+policy:
+  allow_implicit_invocation: false
