@@ -5,10 +5,18 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import uuid
 from pathlib import Path
 from typing import Any, TextIO
+
+
+def default_claude_dir() -> Path:
+    configured_dir = os.environ.get("CLAUDE_CONFIG_DIR")
+    if configured_dir:
+        return Path(configured_dir).expanduser()
+    return Path.home() / ".claude"
 
 
 def parse_args() -> argparse.Namespace:
@@ -19,8 +27,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--claude-dir",
         type=Path,
-        default=Path.home() / ".claude",
-        help="Claude data directory (default: ~/.claude)",
+        default=default_claude_dir(),
+        help="Claude data directory (default: $CLAUDE_CONFIG_DIR or ~/.claude)",
     )
     parser.add_argument("--output", type=Path, help="Write Markdown to this path")
     return parser.parse_args()
