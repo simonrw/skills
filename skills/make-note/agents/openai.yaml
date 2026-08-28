@@ -1,0 +1,3 @@
+interface:
+  display_name: Make a research note
+  short_description: When performing a research task, or using the openspec-explore skill, take a note in my personal notion notebook. Or when asked to continue an investigation from a personal note
