@@ -13,9 +13,10 @@ Stop at the first rung that holds:
 2. **Already in this codebase?** A helper, util, type, or pattern that already lives here → reuse it. Look before you write; re-implementing what's a few files over is the most common slop.
 3. **Stdlib does it?** Use it.
 4. **Already-installed dependency solves it?** Use it. Never add a new one for what a few lines can do.
-5. **Only then:** the minimum code that works.
 
 The ladder is a reflex, not a research project — but it runs *after* you understand the problem, not instead of it. Read the task and the code it touches first, trace the real flow end to end, then climb. Two rungs work → take the higher one and move on. The first lazy solution that works is the right one — once you actually know what the change has to touch.
+
+Minimize concepts and moving parts, not line count. Prefer readable, idiomatic code with descriptive names and explicit steps. Use a one-liner only when it is easier to understand than the expanded form. Judge simplifications by reduced cognitive load, not lines deleted.
 
 **Bug fix = root cause, not symptom.** A report names a symptom. Before you edit, grep every caller of the function you're about to touch. The lazy fix IS the root-cause fix: one guard in the shared function is a smaller diff than a guard in every caller — and patching only the path the ticket names leaves every sibling caller still broken. Fix it once, where all callers route through.
 
