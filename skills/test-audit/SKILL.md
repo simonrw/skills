@@ -53,3 +53,23 @@ class Foo:
 
 * Do not test `Foo._implementation_details`
 * Aim to pass a real `Bar` instance into `Foo` rather than a mock object
+
+# Review
+
+When you have decided on your implementation, ask for an independant review. Summarise your proposal and provide it to an independant sub-agent, along with this guidance. Then iterate with the review subagent to decide on how to proceed.
+
+Then when you have finished your implementation, provide the same context and a summary of what was done to a separate sub-agent also tasked with reviewing the implementation against this brief. Iterate with the second review agent to finalise the tests.
+
+## First review subagent definition
+
+* Model: sol
+* Reasoning: high
+* Brief: you have been given a proposed change to the tests for this project. Validate the tests against the description in the `test-audit` skill and make sure that the proposed tests 
+    * only test the public interface of the code changes
+    * are not focused on implementation details
+
+## Second review subagent definition
+
+* Model: luna
+* Reasoning: medium
+* Brief: Tests have been implemented. Review them against the brief in the `test-audit` skill against the brief in the skill. Make sure the tests pass, and that they are not too focused on implementation details.
