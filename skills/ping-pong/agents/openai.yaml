@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ping Pong"
+  short_description: Get agents to pair program
+policy:
+  allow_implicit_invocation: false
