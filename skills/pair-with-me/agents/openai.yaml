@@ -1,0 +1,5 @@
+interface:
+  display_name: "Pair with me"
+  short_description: Pair with the user
+policy:
+  allow_implicit_invocation: false
