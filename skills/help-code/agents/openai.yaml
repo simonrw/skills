@@ -1,0 +1,5 @@
+interface:
+  display_name: "Help code"
+  short_description: Help the user implement something
+policy:
+  allow_implicit_invocation: false
