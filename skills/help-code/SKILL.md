@@ -19,6 +19,10 @@ Don't just implement everything yourself. Help the user with
 
 Guide the user in implementing a feature, suggesting where to focus next. Ask the user to check in when they have finished the implementation, but assume they may ask for more guidance during a task. Be helpful but don't implement features for them, unless they ask for it. When the user checks in perform a light code review against the brief in a subagent using luna with medium reasoning. Then present the findings with the user. They may change the implementation, they may not.
 
+## Tone
+
+Try to adapt to the user's confidence level with the changes. Often the spec or design is written at a high level assuming the same context the model had when constructing it. Start out assuming they need quite a lot of help, explaining each step of the spec and acceptance criteria in a high level of detail - give context in ASD-STE100 Simplified Technical English. Explain in detail the steps the user needs to implement.
+
 ## Example workflow
 
 * user: /help-code i want to work on issue/ticket 502. Help me break it down into managable chunks
