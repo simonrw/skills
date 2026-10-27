@@ -62,6 +62,8 @@ Then when you have finished your implementation, provide the same context and a 
 
 ## First review subagent definition
 
+Note: models may have other names. For example in Pi, "sol" maps to `openai-codex/gpt-<version>-sol` etc. Use the highest version available.
+
 * Model: sol
 * Reasoning: high
 * Brief: you have been given a proposed change to the tests for this project. Validate the tests against the description in the `test-audit` skill and make sure that the proposed tests 
