@@ -43,22 +43,29 @@ Return findings and a concise coverage report even when no findings are found.
 
 For each finding, give severity, file and line, violated invariant, concrete trigger, observable consequence, supporting evidence, and a minimal fix direction. Distinguish reproduced failures from deductions and unresolved hypotheses.
 
+Rate severity on this scale:
+
+- Critical: data loss, security exposure, or corruption of persisted state under normal use.
+- High: incorrect behavior or a crash on a realistic path, or a violated requirement.
+- Medium: incorrect behavior on an edge case a user could plausibly hit, or a misleading interface or documentation likely to cause a future defect.
+- Low: style, naming, minor simplification, or a defect with an unlikely trigger and limited consequence.
+
 Correctness reviewers report each assigned area's invariant, code and consumers inspected, reproduction or test performed, result, and remaining uncertainty. Label the evidence as static inspection, executed verification, or unverified. Style and abstraction reviewers report inspected scope and evidence supporting their recommendations. Existing tests passing is supporting evidence only for behavior they exercise. A test count alone is not a coverage report.
 
 ## Triage and fix
 
 1. Reconcile overlapping findings and investigate conflicting reviews using the code or a reproduction. Keep unresolved objections visible. Cross-check every finding supplied by the user or earlier reviews against the current code; assign each a disposition supported by evidence.
-2. Summarize findings in the scratch README and link numbered issue files. Preserve reviewer evidence and unverified areas. Present findings to the user for triage and confirmation or exclusion. Implement findings the user confirms or that fall under existing explicit authorization to fix findings. Preserve that authorization across rounds; review-only authorization does not authorize implementation.
+2. Summarize findings in the scratch README and link numbered issue files. Preserve reviewer evidence and unverified areas. Present findings to the user for triage and confirmation or exclusion. Propose fixes only for Medium-or-above findings; list Low findings separately and fix them only if the user asks. Implement findings the user confirms or that fall under existing explicit authorization to fix findings. Preserve that authorization across rounds; review-only authorization does not authorize implementation.
 3. For each agreed change, sequentially delegate implementation, then delegate a fresh focused review of only that fix. Include the original finding, intended invariant, exact fix diff or range, prior review objections, and implementation checks. Include new files explicitly when the fix is uncommitted.
 4. Where practical, add a regression that fails on the original behavior and passes with the fix. Test the reported consequence rather than mirroring implementation details. A crash regression must bypass exception cleanup; a cache regression must inspect persisted outputs; a graph regression must exercise branching.
-5. Iterate until the focused reviewer resolves the finding and any introduced defects. Then commit that change with a descriptive message explaining the issue and behavior. Keep findings file identifiers and paths out of commit messages. Group related findings only when one coherent fix addresses their shared cause.
+5. Iterate until the focused reviewer confirms the finding is resolved and reports no introduced Medium-or-above defects. Then commit that change with a descriptive message explaining the issue and behavior. Keep findings file identifiers and paths out of commit messages. Group related findings only when one coherent fix addresses their shared cause.
 
 Do not push changes.
 
 ## Full re-review and completion
 
-After all agreed fixes are committed, repeat the full review against the original base and new committed head with fresh agents of each reviewer type. Recheck interactions and regressions across fixes, beyond the individual patches. Iterate on new findings through triage and focused fixes.
+After all agreed fixes are committed, repeat the full review against the original base and new committed head with fresh agents of each reviewer type. Recheck interactions and regressions across fixes, beyond the individual patches. Iterate on new Medium-or-above findings through triage and focused fixes. Low findings do not start another round.
 
 Before declaring completion, reconcile reviewer coverage with the scope map. Investigate significant unverified areas or report the limitation explicitly. Verify that every known finding is fixed, excluded by the user, or still open. Separate exclusions from resolved findings.
 
-Finish when the latest full reviews have no unresolved actionable findings within the agreed scope, relevant checks have passed, and the working-tree state is accounted for. Report the commits, validation, exclusions, and remaining uncertainty. Say that the reviews found no remaining issues within their scope; avoid claiming that passing tests or reviewer agreement proves the absence of bugs.
+Finish when the latest full reviews have no unresolved Medium-or-above findings within the agreed scope, relevant checks have passed, and the working-tree state is accounted for. Report the commits, validation, exclusions, unfixed Low findings, and remaining uncertainty. Say that the reviews found no remaining issues within their scope; avoid claiming that passing tests or reviewer agreement proves the absence of bugs.
